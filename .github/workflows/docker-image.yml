@@ -17,4 +17,7 @@ jobs:
     - name: Build image
       run: docker build . --file Dockerfile --tag rayh/eks-deployer:$(date +%s)
     - name: Push image
-      run: docker push rayh/eks-deployer:latest
+      run: |
+        docker push rayh/eks-deployer:$(date +%s)
+        docker tag rayh/eks-deployer:$(date +%s) rayh/eks-deployer:latest
+        docker push rayh/eks-deployer:latest
