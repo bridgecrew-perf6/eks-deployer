@@ -14,10 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Set tag
+      run: export TAG=$(date +%s)    
     - name: Build image
-      run: docker build . --file Dockerfile --tag rayh/eks-deployer:$(date +%s)
+      run: docker build . --file Dockerfile --tag rayh/eks-deployer:$TAG
     - name: Push image
       run: |
-        docker push rayh/eks-deployer:$(date +%s)
-        docker tag rayh/eks-deployer:$(date +%s) rayh/eks-deployer:latest
+        docker push rayh/eks-deployer:$TAG
+        docker tag rayh/eks-deployer:$TAG rayh/eks-deployer:latest
         docker push rayh/eks-deployer:latest
